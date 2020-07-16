@@ -18,7 +18,7 @@ func TestSumByMCC(t *testing.T) {
 		{
 			name: "У пользователя есть транзакции",
 			args: args{MakeTransactions(1), 1},
-			want: map[string]int64{"Рестораны": 769230800, "Аптеки": 769230800, "Такси": 769230800},
+			want: map[string]int64{"Рестораны": 100000, "Аптеки": 100000, "Такси": 100000},
 		},
 		{
 			name: "У пользователя нет транзакций",
@@ -48,7 +48,7 @@ func TestMutexSumByMCC(t *testing.T) {
 		{
 			name: "У пользователя есть транзакции",
 			args: args{MakeTransactions(1), 1},
-			want: map[string]int64{"Рестораны": 769230800, "Аптеки": 769230800, "Такси": 769230800},
+			want: map[string]int64{"Рестораны": 100000, "Аптеки": 100000, "Такси": 100000},
 		},
 		{
 			name: "У пользователя нет транзакций",
@@ -78,7 +78,7 @@ func TestChanSumByMCC(t *testing.T) {
 		{
 			name: "У пользователя есть транзакции",
 			args: args{MakeTransactions(1), 1},
-			want: map[string]int64{"Рестораны": 769230800, "Аптеки": 769230800, "Такси": 769230800},
+			want: map[string]int64{"Рестораны": 100000, "Аптеки": 100000, "Такси": 100000},
 		},
 		{
 			name: "У пользователя нет транзакций",
@@ -108,7 +108,7 @@ func TestMutexSumByMCC2(t *testing.T) {
 		{
 			name: "У пользователя есть транзакции",
 			args: args{MakeTransactions(1), 1},
-			want: map[string]int64{"Рестораны": 769230800, "Аптеки": 769230800, "Такси": 769230800},
+			want: map[string]int64{"Рестораны": 100000, "Аптеки": 100000, "Такси": 100000},
 		},
 		{
 			name: "У пользователя нет транзакций",
@@ -126,7 +126,7 @@ func TestMutexSumByMCC2(t *testing.T) {
 }
 func BenchmarkChanSumByMCC(b *testing.B) {
 	transactions := MakeTransactions(1)
-	want := map[string]int64{"Рестораны": 769230800, "Аптеки": 769230800, "Такси": 769230800}
+	want := map[string]int64{"Рестораны": 100000, "Аптеки": 100000, "Такси": 100000}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		result := ChanSumByMCC(transactions, 1)
@@ -140,7 +140,7 @@ func BenchmarkChanSumByMCC(b *testing.B) {
 
 func BenchmarkMutexSumByCategory(b *testing.B) {
 	transactions := MakeTransactions(1)
-	want := map[string]int64{"Рестораны": 769230800, "Аптеки": 769230800, "Такси": 769230800}
+	want := map[string]int64{"Рестораны": 100000, "Аптеки": 100000, "Такси": 100000}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		result := MutexSumByMCC(transactions, 1)
@@ -154,7 +154,7 @@ func BenchmarkMutexSumByCategory(b *testing.B) {
 
 func BenchmarkMutexSumByMCC2(b *testing.B) {
 	transactions := MakeTransactions(1)
-	want := map[string]int64{"Рестораны": 769230800, "Аптеки": 769230800, "Такси": 769230800}
+	want := map[string]int64{"Рестораны": 100000, "Аптеки": 100000, "Такси": 100000}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		result := MutexSumByMCC2(transactions, 1)
@@ -168,7 +168,7 @@ func BenchmarkMutexSumByMCC2(b *testing.B) {
 
 func BenchmarkSumByMCC(b *testing.B) {
 	transactions := MakeTransactions(1)
-	want := map[string]int64{"Рестораны": 769230800, "Аптеки": 769230800, "Такси": 769230800}
+	want := map[string]int64{"Рестораны": 100000, "Аптеки": 100000, "Такси": 100000}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		result := SumByMCC(transactions, 1)

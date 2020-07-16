@@ -9,8 +9,8 @@ type Transaction struct {
 }
 
 func MakeTransactions(userId int64) []Transaction {
-	const usersCount = 10000
-	const transactionsCount = 10000
+	const usersCount = 100
+	const transactionsCount = 100
 	const transactionAmount = 1_00
 	transactions := make([]Transaction, usersCount*transactionsCount)
 	x := Transaction{
@@ -34,12 +34,12 @@ func MakeTransactions(userId int64) []Transaction {
 		MCC:    "4121",
 	}
 	for index := range transactions {
-		switch index % 13 {
+		switch index % 10 {
 		case 0:
 			transactions[index] = x
-		case 6:
+		case 3:
 			transactions[index] = y
-		case 7:
+		case 5:
 			transactions[index] = z
 		default:
 			transactions[index] = a
@@ -48,26 +48,14 @@ func MakeTransactions(userId int64) []Transaction {
 	return transactions
 }
 
-func Sum(transactions []Transaction) int64 {
-	sum := int64(0)
-	for _, t := range transactions {
-		sum += t.Sum
-	}
-	return sum
-}
-
 // первая функция - принимает на вход слайс транзакций и id владельца -
 // возвращает map с категориями и тратами по ним
 func SumByMCC(transactions []Transaction, userId int64) map[string]int64 {
-	transByMcc := make(map[string][]Transaction)
+	result := make(map[string]int64)
 	for _, value := range transactions {
 		if value.UserId == userId {
-			transByMcc[TranslateMCC(value.MCC)] = append(transByMcc[TranslateMCC(value.MCC)], value)
+			result[TranslateMCC(value.MCC)] += value.Sum
 		}
-	}
-	result := make(map[string]int64)
-	for key, value := range transByMcc {
-		result[key] = Sum(value)
 	}
 	return result
 }
